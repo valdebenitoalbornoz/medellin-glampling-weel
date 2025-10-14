@@ -1,3 +1,11 @@
+// Cargar configuración
+const CONFIG = {
+  API_URL: 'https://medellin-glampling-weel-backend-production.up.railway.app',
+  ENDPOINTS: {
+    REGISTRAR_PREMIO: '/api/registrar-premio'
+  }
+};
+
 const wheelSectors = [
     { color: '#ffcd01', textColor: '#000000', label: '💰 Descuento 5%', probability: 8 },
     { color: '#685ca2', textColor: '#ffffff', label: '💸 Descuento 10%', probability: 16 },
@@ -70,29 +78,48 @@ const wheelSectors = [
       showLoaderOnConfirm: true,
       preConfirm: (email) => {
         return new Promise((resolve, reject) => {
-          // Enviar datos al padre (Wix) y al servidor
-          const premioData = {
-            email: email,
-            premio: premioCompleto,
-            timestamp: new Date().toISOString(),
-            source: 'ruleta-glampling'
-          };
-          
-          // Comunicar con Wix (página padre)
-          if (window.parent !== window) {
-            window.parent.postMessage({
-              type: 'PREMIO_GANADO',
-              data: premioData
-            }, '*');
-          }
-          
-          // Registrar en consola para debugging
-          console.log('🎉 Premio registrado:', premioData);
-          
-          // Simular delay de red
-          setTimeout(() => {
-            resolve(email);
-          }, 1000);
+          // Llamada a la API de Railway
+          fetch(CONFIG.API_URL + CONFIG.ENDPOINTS.REGISTRAR_PREMIO, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: email,
+              premio: premioCompleto,
+              timestamp: new Date().toISOString(),
+              source: 'ruleta-glampling'
+            })
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Error del servidor: ${response.status}`)
+            }
+            return response.json()
+          })
+          .then(data => {
+            console.log('🎉 Premio registrado en API:', data)
+            
+            // Comunicar con Wix (página padre)
+            if (window.parent !== window) {
+              window.parent.postMessage({
+                type: 'PREMIO_GANADO',
+                data: {
+                  email: email,
+                  premio: premioCompleto,
+                  timestamp: new Date().toISOString(),
+                  source: 'ruleta-glampling'
+                }
+              }, '*');
+            }
+            
+            resolve(email)
+          })
+          .catch(error => {
+            console.error('❌ Error al registrar premio:', error)
+            Swal.showValidationMessage('Error al conectar con el servidor. Inténtalo de nuevo.')
+            reject(error)
+          })
         })
       }
     }).then((result) => {

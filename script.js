@@ -1,3 +1,11 @@
+// Cargar configuración
+const CONFIG = {
+  API_URL: 'https://medellin-glampling-weel-backend-production.up.railway.app',
+  ENDPOINTS: {
+    REGISTRAR_PREMIO: '/api/registrar-premio'
+  }
+};
+
 const wheelSectors = [
     { color: '#ffcd01', textColor: '#000000', label: '💰 Descuento 5%', probability: 8 },
     { color: '#685ca2', textColor: '#ffffff', label: '💸 Descuento 10%', probability: 16 },
@@ -70,21 +78,8 @@ const wheelSectors = [
       showLoaderOnConfirm: true,
       preConfirm: (email) => {
         return new Promise((resolve, reject) => {
-          // Simular validación exitosa (modo desarrollo)
-          console.log('🎉 Premio registrado:', {
-            email: email,
-            premio: premioCompleto,
-            timestamp: new Date().toISOString()
-          });
-          
-          // Simular delay de red
-          setTimeout(() => {
-            resolve(email);
-          }, 1000);
-          
-          // Para usar con servidor real, descomenta el código de abajo:
-          /*
-          fetch('registrar-premio.php', {
+          // Llamada a la API de Railway
+          fetch(CONFIG.API_URL + CONFIG.ENDPOINTS.REGISTRAR_PREMIO, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -92,25 +87,25 @@ const wheelSectors = [
             body: JSON.stringify({
               email: email,
               premio: premioCompleto,
-              timestamp: new Date().toISOString()
+              timestamp: new Date().toISOString(),
+              source: 'ruleta-glampling'
             })
           })
           .then(response => {
             if (!response.ok) {
-              throw new Error('Error en el servidor')
+              throw new Error(`Error del servidor: ${response.status}`)
             }
             return response.json()
           })
           .then(data => {
-            console.log('Premio registrado:', data)
+            console.log('🎉 Premio registrado en API:', data)
             resolve(email)
           })
           .catch(error => {
-            console.error('Error al registrar premio:', error)
-            Swal.showValidationMessage('Error al registrar el premio. Inténtalo de nuevo.')
+            console.error('❌ Error al registrar premio:', error)
+            Swal.showValidationMessage('Error al conectar con el servidor. Inténtalo de nuevo.')
             reject(error)
           })
-          */
         })
       }
     }).then((result) => {
