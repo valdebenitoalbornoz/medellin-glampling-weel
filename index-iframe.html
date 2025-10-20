@@ -11,7 +11,7 @@
         body {
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: transparent;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -50,11 +50,18 @@
         }
         
         h1 {
-            color: white;
+            color: #333;
             text-align: center;
             margin-bottom: 20px;
             font-family: 'Arial', sans-serif;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
         }
     </style>
 </head>
@@ -63,6 +70,9 @@
     <div id="spinWheel">
         <canvas id="wheel"></canvas>
         <div id="spin"></div>
+    </div>
+    <div class="instrucciones">
+        👆 Pulsa en el punto del medio para girar la ruleta
     </div>
     <script src="emitter.js"></script>
     <script src="spinweel.js"></script>

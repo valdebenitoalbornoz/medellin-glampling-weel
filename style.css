@@ -10,7 +10,7 @@
     place-items: center;
     margin: 0;
     padding: 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: transparent;
     font-family: 'Arial', sans-serif;
   }
   
@@ -20,6 +20,7 @@
     overflow: hidden;
     max-width: 100%;
     max-height: 100vh;
+    text-align: center;
   }
   
   #spinWheel::after {
@@ -63,6 +64,30 @@
   @media (max-width: 480px) {
     #wheel {
       max-width: 300px;
+    }
+  }
+  
+  /* Desktop - Ruleta más grande */
+  @media (min-width: 769px) {
+    #wheel {
+      max-width: 500px;
+    }
+  }
+  
+  /* Label de instrucciones */
+  .instrucciones {
+    color: #666;
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  
+  @media (max-width: 768px) {
+    .instrucciones {
+      font-size: 12px;
+      margin-top: 10px;
     }
   }
   
