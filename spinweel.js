@@ -5,8 +5,6 @@ class SpinWheel {
       this.canvas = document.querySelector(canvasSelector)
       this.context = this.canvas.getContext('2d')
       this.button = document.querySelector(buttonSelector)
-      this.diameter = this.canvas.width
-      this.radius = this.diameter / 2
       this.totalSectors = sectors.length
       this.arcAngle = (2 * Math.PI) / this.totalSectors
       this.angle = 0
@@ -14,6 +12,7 @@ class SpinWheel {
       this.spinButtonClicked = false
       this.events = new EventEmitter()
       this.targetAngle = 0
+      this.setupResponsiveCanvas()
       this.init()
     }
   
@@ -60,7 +59,9 @@ class SpinWheel {
       this.context.rotate(startAngle + this.arcAngle / 2)
       this.context.textAlign = 'right'
       this.context.fillStyle = sector.textColor
-      this.context.font = "bold 14px 'Lato', sans-serif"
+      // Ajustar tamaño de fuente basado en el radio
+      const fontSize = Math.max(12, this.radius / 15)
+      this.context.font = `bold ${fontSize}px 'Lato', sans-serif`
       this.context.fillText(sector.label, this.radius - 10, 10)
   
       this.context.restore()
@@ -118,6 +119,47 @@ class SpinWheel {
       })
     }
   
+    setupResponsiveCanvas() {
+      // Función para ajustar el tamaño del canvas
+      const resizeCanvas = () => {
+        const container = this.canvas.parentElement
+        const containerWidth = container.clientWidth
+        const containerHeight = container.clientHeight
+        
+        // Calcular el tamaño basado en el contenedor
+        const maxSize = Math.min(containerWidth, containerHeight, 400)
+        const size = Math.max(maxSize, 250) // Tamaño mínimo de 250px
+        
+        this.canvas.width = size
+        this.canvas.height = size
+        this.diameter = size
+        this.radius = size / 2
+        
+        // Redibujar la ruleta
+        this.redrawWheel()
+      }
+      
+      // Ajustar tamaño inicial
+      resizeCanvas()
+      
+      // Escuchar cambios de tamaño
+      window.addEventListener('resize', resizeCanvas)
+      
+      // Ajustar cuando cambie la orientación del dispositivo
+      window.addEventListener('orientationchange', () => {
+        setTimeout(resizeCanvas, 100)
+      })
+    }
+    
+    redrawWheel() {
+      // Limpiar canvas
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      
+      // Redibujar todos los sectores
+      this.sectors.forEach((sector, index) => this.drawSector(sector, index))
+      this.rotateCanvas()
+    }
+    
     static randomInRange(min, max) {
       return Math.random() * (max - min) + min
     }
