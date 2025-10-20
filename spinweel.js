@@ -62,8 +62,8 @@ class SpinWheel {
       this.context.textAlign = 'right'
       this.context.fillStyle = sector.textColor
       
-      // Ajustar tamaño de fuente basado en el radio (más pequeño para móviles)
-      const fontSize = Math.max(10, this.radius / 20)
+      // Ajustar tamaño de fuente basado en el radio (más grande para mejor legibilidad)
+      const fontSize = Math.max(18, this.radius / 12)
       this.context.font = `bold ${fontSize}px 'Lato', sans-serif`
       this.context.fillText(sector.label, this.radius - 10, 10)
   

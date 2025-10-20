@@ -7,14 +7,14 @@ const CONFIG = {
 };
 
 const wheelSectors = [
-    { color: '#f5f1e8', textColor: '#8b4513', label: '💰 Descuento 5%', probability: 8 },
-    { color: '#6b8e5a', textColor: '#ffffff', label: '💸 Descuento 10%', probability: 16 },
-    { color: '#d4c4a8', textColor: '#5d4e37', label: '🎯 Descuento 15%', probability: 8 },
-    { color: '#5a7a4a', textColor: '#ffffff', label: '🎊 Descuento 20%', probability: 6 },
-    { color: '#c4a484', textColor: '#ffffff', label: '🏆 Descuento 80%', probability: 2 },
-    { color: '#4a6b3a', textColor: '#ffffff', label: '🍽️ Comida para dos', probability: 20 },
-    { color: '#a68b5b', textColor: '#ffffff', label: '🍷 Botella de Vino', probability: 20 },
-    { color: '#8b7355', textColor: '#ffffff', label: '💕 Decoración Romántica', probability: 20 }
+    { color: '#f5f1e8', textColor: '#8b4513', label: '-5%', probability: 8 },
+    { color: '#6b8e5a', textColor: '#ffffff', label: '-10%', probability: 16 },
+    { color: '#d4c4a8', textColor: '#5d4e37', label: '-15%', probability: 8 },
+    { color: '#5a7a4a', textColor: '#ffffff', label: '-20%', probability: 6 },
+    { color: '#c4a484', textColor: '#ffffff', label: '-80%', probability: 2 },
+    { color: '#4a6b3a', textColor: '#ffffff', label: '🍽️', probability: 20 },
+    { color: '#a68b5b', textColor: '#ffffff', label: '🍷', probability: 20 },
+    { color: '#8b7355', textColor: '#ffffff', label: '💕', probability: 20 }
   ]
   
   const spinWheel = new SpinWheel({
@@ -25,14 +25,14 @@ const wheelSectors = [
   
   spinWheel.events.on('finishSpinning', sector => {
     const premios = {
-      '💰 Descuento 5%': 'Descuento del 5%',
-      '💸 Descuento 10%': 'Descuento del 10%',
-      '🎯 Descuento 15%': 'Descuento del 15%',
-      '🎊 Descuento 20%': 'Descuento del 20%',
-      '🏆 Descuento 80%': 'Descuento del 80%',
-      '🍽️ Comida para dos': 'Comida para dos',
-      '🍷 Botella de Vino': 'Botella de vino',
-      '💕 Decoración Romántica': 'Decoración romántica'
+      '-5%': 'Descuento del 5%',
+      '-10%': 'Descuento del 10%',
+      '-15%': 'Descuento del 15%',
+      '-20%': 'Descuento del 20%',
+      '-80%': 'Descuento del 80%',
+      '🍽️': 'Comida para dos',
+      '🍷': 'Botella de vino',
+      '💕': 'Decoración romántica'
     }
 
     const premioCompleto = premios[sector.label]
