@@ -70,7 +70,49 @@
   /* Desktop - Ruleta más grande */
   @media (min-width: 769px) {
     #wheel {
-      max-width: 500px;
+      max-width: 600px;
+      min-width: 500px;
+    }
+  }
+  
+  /* Desktop grande - Ruleta aún más grande */
+  @media (min-width: 1200px) {
+    #wheel {
+      max-width: 700px;
+      min-width: 600px;
+    }
+  }
+  
+  /* Título principal */
+  h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  /* Desktop - Título más grande */
+  @media (min-width: 769px) {
+    h1 {
+      font-size: 32px;
+      margin-bottom: 25px;
+    }
+  }
+  
+  /* Móvil - Título más pequeño */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 18px;
+      margin-bottom: 12px;
     }
   }
   
@@ -88,6 +130,13 @@
     .instrucciones {
       font-size: 12px;
       margin-top: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .instrucciones {
+      font-size: 11px;
+      margin-top: 8px;
     }
   }
   

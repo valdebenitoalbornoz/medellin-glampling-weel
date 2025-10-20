@@ -54,13 +54,30 @@
             text-align: center;
             margin-bottom: 20px;
             font-family: 'Arial', sans-serif;
-            font-size: 24px;
+            font-size: 28px;
+            font-weight: bold;
         }
         
+        /* Desktop - Título más grande */
+        @media (min-width: 769px) {
+            h1 {
+                font-size: 32px;
+                margin-bottom: 25px;
+            }
+        }
+        
+        /* Móvil - Título más pequeño */
         @media (max-width: 768px) {
             h1 {
                 font-size: 20px;
                 margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+                margin-bottom: 12px;
             }
         }
     </style>

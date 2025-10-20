@@ -129,18 +129,22 @@ class SpinWheel {
         // Calcular el tamaño basado en el contenedor y dispositivo
         let maxSize, minSize
         
-        if (window.innerWidth >= 769) {
+        if (window.innerWidth >= 1200) {
+          // Desktop grande - muy grande
+          maxSize = Math.min(containerWidth, containerHeight, 700)
+          minSize = 600
+        } else if (window.innerWidth >= 769) {
           // Desktop - más grande
-          maxSize = Math.min(containerWidth, containerHeight, 500)
-          minSize = 350
+          maxSize = Math.min(containerWidth, containerHeight, 600)
+          minSize = 500
         } else if (window.innerWidth >= 481) {
           // Tablet
-          maxSize = Math.min(containerWidth, containerHeight, 350)
-          minSize = 250
+          maxSize = Math.min(containerWidth, containerHeight, 400)
+          minSize = 300
         } else {
           // Móvil
-          maxSize = Math.min(containerWidth, containerHeight, 300)
-          minSize = 200
+          maxSize = Math.min(containerWidth, containerHeight, 320)
+          minSize = 250
         }
         
         const size = Math.max(maxSize, minSize)
