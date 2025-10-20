@@ -5,6 +5,8 @@ class SpinWheel {
       this.canvas = document.querySelector(canvasSelector)
       this.context = this.canvas.getContext('2d')
       this.button = document.querySelector(buttonSelector)
+      this.logoCanvas = document.querySelector('#logoCanvas')
+      this.logoContext = this.logoCanvas ? this.logoCanvas.getContext('2d') : null
       this.totalSectors = sectors.length
       this.arcAngle = (2 * Math.PI) / this.totalSectors
       this.angle = 0
@@ -59,17 +61,73 @@ class SpinWheel {
       this.context.rotate(startAngle + this.arcAngle / 2)
       this.context.textAlign = 'right'
       this.context.fillStyle = sector.textColor
-      // Ajustar tamaño de fuente basado en el radio
-      const fontSize = Math.max(12, this.radius / 15)
-      this.context.font = `bold ${fontSize}px 'Lato', sans-serif`
+      this.context.font = "bold 14px 'Lato', sans-serif"
       this.context.fillText(sector.label, this.radius - 10, 10)
   
       this.context.restore()
     }
-  
+    
     rotateCanvas() {
       const currentSector = this.sectors[this.currentIndex]
       this.canvas.style.transform = `rotate(${this.angle - Math.PI / 2}rad)`
+    }
+    
+    drawStaticLogo() {
+      if (!this.logoCanvas || !this.logoContext) {
+        console.log('Logo canvas no encontrado')
+        return
+      }
+      
+      
+      // Limpiar canvas del logo
+      this.logoContext.clearRect(0, 0, this.logoCanvas.width, this.logoCanvas.height)
+      
+      // Crear imagen del logo estático (no gira con la ruleta)
+      const logo = new Image()
+      logo.onload = () => {
+        console.log('Logo cargado correctamente')
+        // Calcular tamaño del logo (30% del radio de la ruleta - más pequeño)
+        const logoSize = this.radius * 0.3
+        const x = this.radius - logoSize / 2
+        const y = this.radius - logoSize / 2
+        
+        
+        // Dibujar fondo circular para el logo
+        this.logoContext.save()
+        this.logoContext.beginPath()
+        this.logoContext.arc(this.radius, this.radius, logoSize / 2 + 3, 0, 2 * Math.PI)
+        this.logoContext.fillStyle = 'rgba(255, 255, 255, 0.95)'
+        this.logoContext.fill()
+        this.logoContext.strokeStyle = '#ddd'
+        this.logoContext.lineWidth = 1
+        this.logoContext.stroke()
+        this.logoContext.restore()
+        
+        // Crear máscara circular para el logo
+        this.logoContext.save()
+        this.logoContext.beginPath()
+        this.logoContext.arc(this.radius, this.radius, logoSize / 2, 0, 2 * Math.PI)
+        this.logoContext.clip()
+        
+        // Dibujar el logo dentro de la máscara circular
+        this.logoContext.drawImage(logo, x, y, logoSize, logoSize)
+        this.logoContext.restore()
+        
+      }
+      logo.onerror = () => {
+        console.log('Error cargando el logo')
+        // Dibujar un círculo de fallback
+        this.logoContext.save()
+        this.logoContext.beginPath()
+        this.logoContext.arc(this.radius, this.radius, this.radius * 0.15, 0, 2 * Math.PI)
+        this.logoContext.fillStyle = 'rgba(255, 255, 255, 0.95)'
+        this.logoContext.fill()
+        this.logoContext.strokeStyle = '#ddd'
+        this.logoContext.lineWidth = 2
+        this.logoContext.stroke()
+        this.logoContext.restore()
+      }
+      logo.src = 'Logo 8x8 CM.jpg'
     }
   
     updateFrame() {
@@ -101,6 +159,11 @@ class SpinWheel {
       this.sectors.forEach((sector, index) => this.drawSector(sector, index))
       this.rotateCanvas()
       this.startSimulation()
+      
+      // Dibujar logo estático después de un pequeño delay
+      setTimeout(() => {
+        this.drawStaticLogo()
+      }, 100)
   
       this.button.addEventListener('click', () => {
         if (!this.angularVelocity) {
@@ -154,8 +217,15 @@ class SpinWheel {
         this.diameter = size
         this.radius = size / 2
         
+        // Configurar canvas del logo
+        if (this.logoCanvas && this.logoContext) {
+          this.logoCanvas.width = size
+          this.logoCanvas.height = size
+          }
+        
         // Redibujar la ruleta
         this.redrawWheel()
+        this.redrawStaticLogo()
       }
       
       // Ajustar tamaño inicial
@@ -176,7 +246,13 @@ class SpinWheel {
       
       // Redibujar todos los sectores
       this.sectors.forEach((sector, index) => this.drawSector(sector, index))
+      
       this.rotateCanvas()
+    }
+    
+    redrawStaticLogo() {
+      // Dibujar logo estático (no gira)
+      this.drawStaticLogo()
     }
     
     static randomInRange(min, max) {

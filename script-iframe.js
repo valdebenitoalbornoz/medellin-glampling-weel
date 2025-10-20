@@ -7,14 +7,14 @@ const CONFIG = {
 };
 
 const wheelSectors = [
-    { color: '#ffcd01', textColor: '#000000', label: '💰 Descuento 5%', probability: 8 },
-    { color: '#685ca2', textColor: '#ffffff', label: '💸 Descuento 10%', probability: 16 },
-    { color: '#029ede', textColor: '#ffffff', label: '🎯 Descuento 15%', probability: 8 },
-    { color: '#a7d02a', textColor: '#ffffff', label: '🎊 Descuento 20%', probability: 6 },
-    { color: '#ff1744', textColor: '#ffffff', label: '🏆 Descuento 80%', probability: 2 },
-    { color: '#26cda2', textColor: '#ffffff', label: '🍽️ Comida para dos', probability: 20 },
-    { color: '#8f3389', textColor: '#ffffff', label: '🍷 Botella de Vino', probability: 20 },
-    { color: '#e65100', textColor: '#ffffff', label: '💕 Decoración Romántica', probability: 20 }
+    { color: '#f5f1e8', textColor: '#8b4513', label: '💰 Descuento 5%', probability: 8 },
+    { color: '#6b8e5a', textColor: '#ffffff', label: '💸 Descuento 10%', probability: 16 },
+    { color: '#d4c4a8', textColor: '#5d4e37', label: '🎯 Descuento 15%', probability: 8 },
+    { color: '#5a7a4a', textColor: '#ffffff', label: '🎊 Descuento 20%', probability: 6 },
+    { color: '#c4a484', textColor: '#ffffff', label: '🏆 Descuento 80%', probability: 2 },
+    { color: '#4a6b3a', textColor: '#ffffff', label: '🍽️ Comida para dos', probability: 20 },
+    { color: '#a68b5b', textColor: '#ffffff', label: '🍷 Botella de Vino', probability: 20 },
+    { color: '#8b7355', textColor: '#ffffff', label: '💕 Decoración Romántica', probability: 20 }
   ]
   
   const spinWheel = new SpinWheel({
@@ -143,8 +143,13 @@ const wheelSectors = [
             </div>
           `,
           icon: 'success',
-          confirmButtonText: '🎉 ¡Genial!',
-          confirmButtonColor: '#27ae60'
+          confirmButtonText: '🏕️ Conocer Medellín Glamping',
+          confirmButtonColor: '#27ae60',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then(() => {
+          // Redirigir a la página del glamping
+          window.open('https://www.medellinglamping.com.co/', '_blank')
         })
       }
     })
