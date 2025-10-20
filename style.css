@@ -44,6 +44,11 @@
     height: auto;
     position: relative;
     z-index: 2;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   #logoCanvas {
@@ -53,6 +58,10 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 5;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   /* Responsive para móviles */
