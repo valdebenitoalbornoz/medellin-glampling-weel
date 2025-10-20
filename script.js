@@ -138,6 +138,29 @@ const wheelSectors = [
           // Redirigir a la página del glamping
           window.open('https://www.medellinglamping.com.co/', '_blank')
         })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si cancela, también lo dirigimos al glamping
+        Swal.fire({
+          title: '🏕️ ¡Conoce Medellín Glamping!',
+          html: `
+            <div style="text-align: center;">
+              <p style="color: #2c3e50; margin-bottom: 15px;">
+                Aunque no validaste tu premio, ¡te invitamos a conocer nuestro glamping!
+              </p>
+              <p style="color: #7f8c8d;">
+                Descubre una experiencia única a 30 minutos del centro de Medellín.
+              </p>
+            </div>
+          `,
+          icon: 'info',
+          confirmButtonText: '🏕️ Conocer Glamping',
+          confirmButtonColor: '#27ae60',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then(() => {
+          // Redirigir a la página del glamping
+          window.open('https://www.medellinglamping.com.co/', '_blank')
+        })
       }
     })
     .catch(err => {
