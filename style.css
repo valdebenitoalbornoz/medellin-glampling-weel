@@ -57,15 +57,9 @@
   
   /* Responsive para tablets (768px) */
   @media (min-width: 481px) and (max-width: 768px) {
-    body {
-      padding: 10px;
-    }
     
-    #spinWheel {
-      max-width: 95vw;
-      max-height: 90vh;
-      padding: 15px;
-    }
+    
+    
     
     #wheel {
       width: 100%;
@@ -73,12 +67,15 @@
       min-width: 450px;
       height: auto;
     }
+    
+    
   }
   
   /* Responsive para móviles pequeños */
   @media (max-width: 480px) {
     body {
-      padding: 5px;
+      padding: 5px 5px 80px 5px;
+      min-height: 100vh;
     }
     
     #spinWheel {
@@ -160,6 +157,7 @@
     .instrucciones {
       font-size: 12px;
       margin-top: 10px;
+      margin-bottom: 30px;
       max-width: 300px;
     }
   }
@@ -167,8 +165,10 @@
   @media (max-width: 480px) {
     .instrucciones {
       font-size: 11px;
-      margin-top: 8px;
+      margin-top: 10px;
+      margin-bottom: 60px;
       max-width: 250px;
+      padding-bottom: 20px;
     }
   }
   
