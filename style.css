@@ -26,13 +26,13 @@
   #spinWheel::after {
     content: "";
     position: absolute;
-    top: -10px;
-    left: calc(50% - 10px);
+    top: -30px;
+    left: calc(50% - 30px);
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 20px solid #feeb69;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 50px solid #f5e320;
     -webkit-filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, .5));
     filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, .5));
     z-index: 15;
@@ -55,8 +55,28 @@
     z-index: 5;
   }
   
-  /* Responsive para móviles */
-  @media (max-width: 768px) {
+  /* Responsive para tablets (768px) */
+  @media (min-width: 481px) and (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+    
+    #spinWheel {
+      max-width: 95vw;
+      max-height: 90vh;
+      padding: 15px;
+    }
+    
+    #wheel {
+      width: 100%;
+      max-width: 550px;
+      min-width: 450px;
+      height: auto;
+    }
+  }
+  
+  /* Responsive para móviles pequeños */
+  @media (max-width: 480px) {
     body {
       padding: 5px;
     }
@@ -68,19 +88,13 @@
     
     #wheel {
       width: 100%;
-      max-width: 350px;
+      max-width: 300px;
       height: auto;
     }
   }
   
-  @media (max-width: 480px) {
-    #wheel {
-      max-width: 300px;
-    }
-  }
-  
   /* Desktop - Ruleta más grande */
-  @media (min-width: 769px) {
+  @media (min-width: 769px) and (max-width: 1199px) {
     #wheel {
       max-width: 600px;
       min-width: 500px;
@@ -96,18 +110,19 @@
   }
   
   /* Título principal */
-  h1 {
+  h4 {
     color: #333;
     text-align: center;
     margin-bottom: 20px;
     font-family: 'Arial', sans-serif;
     font-size: 28px;
     font-weight: bold;
+    text-align: center;
   }
   
   /* Desktop - Título más grande */
   @media (min-width: 769px) {
-    h1 {
+    h4 {
       font-size: 32px;
       margin-bottom: 25px;
     }
@@ -115,14 +130,14 @@
   
   /* Móvil - Título más pequeño */
   @media (max-width: 768px) {
-    h1 {
+    h4 {
       font-size: 20px;
       margin-bottom: 15px;
     }
   }
   
   @media (max-width: 480px) {
-    h1 {
+    h4 {
       font-size: 18px;
       margin-bottom: 12px;
     }

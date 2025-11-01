@@ -19,6 +19,13 @@
             justify-content: center;
         }
         
+        /* Responsive body para tablets */
+        @media (min-width: 481px) and (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+        }
+        
         #spinWheel {
             background: white;
             border-radius: 20px;
@@ -31,12 +38,12 @@
             align-items: center;
         }
         
-        /* Responsive para móviles */
-        @media (max-width: 768px) {
+        /* Responsive para tablets (768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
             #spinWheel {
                 padding: 15px;
                 margin: 10px;
-                max-width: 90vw;
+                max-width: 95vw;
                 max-height: 90vh;
             }
         }
@@ -66,7 +73,7 @@
             }
         }
         
-        /* Móvil - Título más pequeño */
+        /* Tablet y móvil - Título más pequeño */
         @media (max-width: 768px) {
             h1 {
                 font-size: 20px;

@@ -203,17 +203,17 @@ class SpinWheel {
           // Desktop - más grande
           maxSize = Math.min(containerWidth, containerHeight, 600)
           minSize = 500
-        } else if (window.innerWidth >= 481) {
-          // Tablet
-          maxSize = Math.min(containerWidth, containerHeight, 400)
-          minSize = 300
+        } else if (window.innerWidth >= 481 && window.innerWidth <= 768) {
+          // Tablet (768px)
+          maxSize = Math.min(containerWidth, containerHeight, 550)
+          minSize = 450
         } else {
           // Móvil
           maxSize = Math.min(containerWidth, containerHeight, 320)
           minSize = 250
         }
         
-        const size = Math.max(maxSize, minSize)
+        const size = Math.max(minSize, Math.min(maxSize, containerWidth, containerHeight))
         
         this.canvas.width = size
         this.canvas.height = size

@@ -7,11 +7,11 @@ const CONFIG = {
 };
 
 const wheelSectors = [
-    { color: '#f5f1e8', textColor: '#8b4513', label: '-5%', probability: 8 },
+    { color: '#f5f1e8', textColor: '#8b4513', label: '-5%', probability: 9 },
     { color: '#6b8e5a', textColor: '#ffffff', label: '-10%', probability: 16 },
     { color: '#d4c4a8', textColor: '#5d4e37', label: '-15%', probability: 8 },
     { color: '#5a7a4a', textColor: '#ffffff', label: '-20%', probability: 6 },
-    { color: '#c4a484', textColor: '#ffffff', label: '-80%', probability: 2 },
+    { color: '#c4a484', textColor: '#ffffff', label: '-80%', probability: 1 },
     { color: '#4a6b3a', textColor: '#ffffff', label: '🍽️', probability: 20 },
     { color: '#a68b5b', textColor: '#ffffff', label: '🍷', probability: 20 },
     { color: '#8b7355', textColor: '#ffffff', label: '💕', probability: 20 }
